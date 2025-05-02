@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package user.v1;
+
+option go_package = "pinstack-proto-definitions/user/v1;userv1";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// User service definition
+service UserService {
+  // Create a new user
+  rpc CreateUser(CreateUserRequest) returns (User) {}
+
+  // Get user by ID
+  rpc GetUser(GetUserRequest) returns (User) {}
+
+  // Get user by username
+  rpc GetUserByUsername(GetUserByUsernameRequest) returns (User) {}
+
+  // Get user by email
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (User) {}
+
+  // Update user
+  rpc UpdateUser(UpdateUserRequest) returns (User) {}
+
+  // Delete user
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {}
+
+  // Search users
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {}
+
+  // Update password
+  rpc UpdatePassword(UpdatePasswordRequest) returns (google.protobuf.Empty) {}
+
+  // Update avatar
+  rpc UpdateAvatar(UpdateAvatarRequest) returns (google.protobuf.Empty) {}
+}
+
+// User message definition
+message User {
+  int64 id = 1;
+  string username = 2;
+  string email = 3;
+  optional string full_name = 4;
+  optional string bio = 5;
+  optional string avatar_url = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+// Request messages
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+  optional string full_name = 4;
+  optional string bio = 5;
+  optional string avatar_url = 6;
+}
+
+message GetUserRequest {
+  int64 id = 1;
+}
+
+message GetUserByUsernameRequest {
+  string username = 1;
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+}
+
+message UpdateUserRequest {
+  int64 id = 1;
+  optional string username = 2;
+  optional string email = 3;
+  optional string full_name = 4;
+  optional string bio = 5;
+}
+
+message DeleteUserRequest {
+  int64 id = 1;
+}
+
+message SearchUsersRequest {
+  string query = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message SearchUsersResponse {
+  repeated User users = 1;
+  int64 total = 2;
+}
+
+message UpdatePasswordRequest {
+  int64 id = 1;
+  string password = 2;
+}
+
+message UpdateAvatarRequest {
+  int64 id = 1;
+  string avatar_url = 2;
+}
