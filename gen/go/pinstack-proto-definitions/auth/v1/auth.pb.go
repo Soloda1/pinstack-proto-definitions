@@ -300,6 +300,66 @@ func (x *LogoutRequest) GetRefreshToken() string {
 	return ""
 }
 
+type UpdatePasswordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OldPassword   string                 `protobuf:"bytes,2,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
+	NewPassword   string                 `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePasswordRequest) Reset() {
+	*x = UpdatePasswordRequest{}
+	mi := &file_auth_auth_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePasswordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePasswordRequest) ProtoMessage() {}
+
+func (x *UpdatePasswordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_auth_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePasswordRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePasswordRequest) Descriptor() ([]byte, []int) {
+	return file_auth_auth_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdatePasswordRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdatePasswordRequest) GetOldPassword() string {
+	if x != nil {
+		return x.OldPassword
+	}
+	return ""
+}
+
+func (x *UpdatePasswordRequest) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
+	}
+	return ""
+}
+
 var File_auth_auth_proto protoreflect.FileDescriptor
 
 const file_auth_auth_proto_rawDesc = "" +
@@ -326,12 +386,17 @@ const file_auth_auth_proto_rawDesc = "" +
 	"\x0eRefreshRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"4\n" +
 	"\rLogoutRequest\x12#\n" +
-	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken2\xf5\x01\n" +
+	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"m\n" +
+	"\x15UpdatePasswordRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12!\n" +
+	"\fold_password\x18\x02 \x01(\tR\voldPassword\x12!\n" +
+	"\fnew_password\x18\x03 \x01(\tR\vnewPassword2\xc1\x02\n" +
 	"\vAuthService\x12:\n" +
 	"\bRegister\x12\x18.auth.v1.RegisterRequest\x1a\x12.auth.v1.TokenPair\"\x00\x124\n" +
 	"\x05Login\x12\x15.auth.v1.LoginRequest\x1a\x12.auth.v1.TokenPair\"\x00\x128\n" +
 	"\aRefresh\x12\x17.auth.v1.RefreshRequest\x1a\x12.auth.v1.TokenPair\"\x00\x12:\n" +
-	"\x06Logout\x12\x16.auth.v1.LogoutRequest\x1a\x16.google.protobuf.Empty\"\x00B+Z)pinstack-proto-definitions/auth/v1;authv1b\x06proto3"
+	"\x06Logout\x12\x16.auth.v1.LogoutRequest\x1a\x16.google.protobuf.Empty\"\x00\x12J\n" +
+	"\x0eUpdatePassword\x12\x1e.auth.v1.UpdatePasswordRequest\x1a\x16.google.protobuf.Empty\"\x00B+Z)pinstack-proto-definitions/auth/v1;authv1b\x06proto3"
 
 var (
 	file_auth_auth_proto_rawDescOnce sync.Once
@@ -345,26 +410,29 @@ func file_auth_auth_proto_rawDescGZIP() []byte {
 	return file_auth_auth_proto_rawDescData
 }
 
-var file_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_auth_auth_proto_goTypes = []any{
-	(*TokenPair)(nil),       // 0: auth.v1.TokenPair
-	(*RegisterRequest)(nil), // 1: auth.v1.RegisterRequest
-	(*LoginRequest)(nil),    // 2: auth.v1.LoginRequest
-	(*RefreshRequest)(nil),  // 3: auth.v1.RefreshRequest
-	(*LogoutRequest)(nil),   // 4: auth.v1.LogoutRequest
-	(*emptypb.Empty)(nil),   // 5: google.protobuf.Empty
+	(*TokenPair)(nil),             // 0: auth.v1.TokenPair
+	(*RegisterRequest)(nil),       // 1: auth.v1.RegisterRequest
+	(*LoginRequest)(nil),          // 2: auth.v1.LoginRequest
+	(*RefreshRequest)(nil),        // 3: auth.v1.RefreshRequest
+	(*LogoutRequest)(nil),         // 4: auth.v1.LogoutRequest
+	(*UpdatePasswordRequest)(nil), // 5: auth.v1.UpdatePasswordRequest
+	(*emptypb.Empty)(nil),         // 6: google.protobuf.Empty
 }
 var file_auth_auth_proto_depIdxs = []int32{
 	1, // 0: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
 	2, // 1: auth.v1.AuthService.Login:input_type -> auth.v1.LoginRequest
 	3, // 2: auth.v1.AuthService.Refresh:input_type -> auth.v1.RefreshRequest
 	4, // 3: auth.v1.AuthService.Logout:input_type -> auth.v1.LogoutRequest
-	0, // 4: auth.v1.AuthService.Register:output_type -> auth.v1.TokenPair
-	0, // 5: auth.v1.AuthService.Login:output_type -> auth.v1.TokenPair
-	0, // 6: auth.v1.AuthService.Refresh:output_type -> auth.v1.TokenPair
-	5, // 7: auth.v1.AuthService.Logout:output_type -> google.protobuf.Empty
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	5, // 4: auth.v1.AuthService.UpdatePassword:input_type -> auth.v1.UpdatePasswordRequest
+	0, // 5: auth.v1.AuthService.Register:output_type -> auth.v1.TokenPair
+	0, // 6: auth.v1.AuthService.Login:output_type -> auth.v1.TokenPair
+	0, // 7: auth.v1.AuthService.Refresh:output_type -> auth.v1.TokenPair
+	6, // 8: auth.v1.AuthService.Logout:output_type -> google.protobuf.Empty
+	6, // 9: auth.v1.AuthService.UpdatePassword:output_type -> google.protobuf.Empty
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -382,7 +450,7 @@ func file_auth_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_auth_proto_rawDesc), len(file_auth_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

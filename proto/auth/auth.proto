@@ -19,6 +19,9 @@ service AuthService {
 
   // Logout (invalidate refresh token)
   rpc Logout(LogoutRequest) returns (google.protobuf.Empty) {}
+
+  // Update password
+  rpc UpdatePassword(UpdatePasswordRequest) returns (google.protobuf.Empty) {}
 }
 
 // Token pair message
@@ -48,4 +51,10 @@ message RefreshRequest {
 
 message LogoutRequest {
   string refresh_token = 1;
+}
+
+message UpdatePasswordRequest {
+  int64 id = 1;
+  string old_password = 2;
+  string new_password = 3;
 }
