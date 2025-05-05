@@ -576,7 +576,8 @@ func (x *SearchUsersResponse) GetTotal() int64 {
 type UpdatePasswordRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	OldPassword   string                 `protobuf:"bytes,2,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
+	NewPassword   string                 `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -618,9 +619,16 @@ func (x *UpdatePasswordRequest) GetId() int64 {
 	return 0
 }
 
-func (x *UpdatePasswordRequest) GetPassword() string {
+func (x *UpdatePasswordRequest) GetOldPassword() string {
 	if x != nil {
-		return x.Password
+		return x.OldPassword
+	}
+	return ""
+}
+
+func (x *UpdatePasswordRequest) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
 	}
 	return ""
 }
@@ -735,10 +743,11 @@ const file_user_user_proto_rawDesc = "" +
 	"\x05limit\x18\x03 \x01(\x05R\x05limit\"P\n" +
 	"\x13SearchUsersResponse\x12#\n" +
 	"\x05users\x18\x01 \x03(\v2\r.user.v1.UserR\x05users\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x03R\x05total\"C\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"m\n" +
 	"\x15UpdatePasswordRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"D\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12!\n" +
+	"\fold_password\x18\x02 \x01(\tR\voldPassword\x12!\n" +
+	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\"D\n" +
 	"\x13UpdateAvatarRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1d\n" +
 	"\n" +
