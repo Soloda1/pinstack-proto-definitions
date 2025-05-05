@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package auth.v1;
+
+option go_package = "pinstack-proto-definitions/auth/v1;authv1";
+
+import "google/protobuf/empty.proto";
+
+// Auth service definition
+service AuthService {
+  // Register a new user (calls user service internally)
+  rpc Register(RegisterRequest) returns (TokenPair) {}
+
+  // Login using username or email
+  rpc Login(LoginRequest) returns (TokenPair) {}
+
+  // Refresh tokens
+  rpc Refresh(RefreshRequest) returns (TokenPair) {}
+
+  // Logout (invalidate refresh token)
+  rpc Logout(LogoutRequest) returns (google.protobuf.Empty) {}
+}
+
+// Token pair message
+message TokenPair {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+// Request messages
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+  optional string full_name = 4;
+  optional string bio = 5;
+  optional string avatar_url = 6;
+}
+
+message LoginRequest {
+  string login = 1;   // can be username or email
+  string password = 2;
+}
+
+message RefreshRequest {
+  string refresh_token = 1;
+}
+
+message LogoutRequest {
+  string refresh_token = 1;
+}
