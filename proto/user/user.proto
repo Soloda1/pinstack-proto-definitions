@@ -47,6 +47,7 @@ message User {
   optional string avatar_url = 6;
   google.protobuf.Timestamp created_at = 7;
   google.protobuf.Timestamp updated_at = 8;
+  string password = 9;
 }
 
 // Request messages
