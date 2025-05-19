@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package post.v1;
+
+option go_package = "pinstack-proto-definitions/post/v1;postv1";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+// Post service definition
+service PostService {
+  rpc CreatePost(CreatePostRequest) returns (Post) {}
+  rpc GetPost(GetPostRequest) returns (Post) {}
+  rpc ListPosts(ListPostsRequest) returns (ListPostsResponse) {}
+  rpc UpdatePost(UpdatePostRequest) returns (Post) {}
+  rpc DeletePost(DeletePostRequest) returns (google.protobuf.Empty) {}
+}
+
+// Post message definition
+message Post {
+  int64 id = 1;
+  int64 author_id = 2;
+  string title = 3;
+  string content = 4;
+  repeated string tags = 5;
+  repeated Media media = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+// Media message definition
+message Media {
+  int64 id = 1;
+  string url = 2;
+  string type = 3;
+  int32 position = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+// Request/response messages
+message CreatePostRequest {
+  int64 author_id = 1;
+  string title = 2;
+  string content = 3;
+  repeated string tags = 4;
+  repeated MediaInput media = 5;
+}
+
+message MediaInput {
+  string url = 1;
+  string type = 2;
+  int32 position = 3;
+}
+
+message GetPostRequest {
+  int64 id = 1;
+}
+
+message ListPostsRequest {
+  int64 author_id = 1;
+  int32 offset = 2;
+  int32 limit = 3;
+}
+
+message ListPostsResponse {
+  repeated Post posts = 1;
+  int64 total = 2;
+}
+
+message UpdatePostRequest {
+  int64 id = 1;
+  string title = 2;
+  string content = 3;
+  repeated string tags = 4;
+  repeated MediaInput media = 5;
+}
+
+message DeletePostRequest {
+  int64 id = 1;
+}
