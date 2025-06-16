@@ -6,7 +6,8 @@ GO_OUT := gen/go
 PROTO_FILES := \
 	$(PROTO_DIR)/user/user.proto \
 	$(PROTO_DIR)/auth/auth.proto \
-	$(PROTO_DIR)/post/post.proto
+	$(PROTO_DIR)/post/post.proto \
+	$(PROTO_DIR)/relation/relation.proto \
 
 generate:
 	protoc \

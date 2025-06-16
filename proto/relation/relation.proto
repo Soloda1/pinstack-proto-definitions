@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package relation.v1;
+
+option go_package = "pinstack-proto-definitions/relation/v1;relationv1";
+
+service RelationService {
+  rpc Follow(FollowRequest) returns (FollowResponse);
+  rpc Unfollow(UnfollowRequest) returns (UnfollowResponse);
+  rpc GetFollowers(GetFollowersRequest) returns (GetFollowersResponse);
+  rpc GetFollowees(GetFolloweesRequest) returns (GetFolloweesResponse);
+}
+
+message FollowRequest {
+  int64 follower_id = 1;
+  int64 followee_id = 2;
+}
+
+message FollowResponse {
+}
+
+message UnfollowRequest {
+  int64 follower_id = 1;
+  int64 followee_id = 2;
+}
+
+message UnfollowResponse {
+}
+
+message GetFollowersRequest {
+  int64 followee_id = 1;
+  int32 limit = 2;
+  int32 page = 3;
+}
+
+message GetFollowersResponse {
+  repeated int64 follower_ids = 1;
+}
+
+message GetFolloweesRequest {
+  int64 follower_id = 1;
+  int32 limit = 2;
+  int32 page = 3;
+}
+
+message GetFolloweesResponse {
+  repeated int64 followee_ids = 1;
+}
