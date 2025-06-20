@@ -8,6 +8,7 @@ PROTO_FILES := \
 	$(PROTO_DIR)/auth/auth.proto \
 	$(PROTO_DIR)/post/post.proto \
 	$(PROTO_DIR)/relation/relation.proto \
+	$(PROTO_DIR)/notification/notification.proto \
 
 generate:
 	protoc \
