@@ -197,6 +197,66 @@ func (*UnfollowResponse) Descriptor() ([]byte, []int) {
 	return file_relation_relation_proto_rawDescGZIP(), []int{3}
 }
 
+type User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FollowerId    int64                  `protobuf:"varint,1,opt,name=follower_id,json=followerId,proto3" json:"follower_id,omitempty"`
+	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	AvatarUrl     *string                `protobuf:"bytes,3,opt,name=avatar_url,json=avatarUrl,proto3,oneof" json:"avatar_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_relation_relation_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_relation_relation_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_relation_relation_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *User) GetFollowerId() int64 {
+	if x != nil {
+		return x.FollowerId
+	}
+	return 0
+}
+
+func (x *User) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *User) GetAvatarUrl() string {
+	if x != nil && x.AvatarUrl != nil {
+		return *x.AvatarUrl
+	}
+	return ""
+}
+
 type GetFollowersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FolloweeId    int64                  `protobuf:"varint,1,opt,name=followee_id,json=followeeId,proto3" json:"followee_id,omitempty"`
@@ -208,7 +268,7 @@ type GetFollowersRequest struct {
 
 func (x *GetFollowersRequest) Reset() {
 	*x = GetFollowersRequest{}
-	mi := &file_relation_relation_proto_msgTypes[4]
+	mi := &file_relation_relation_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -220,7 +280,7 @@ func (x *GetFollowersRequest) String() string {
 func (*GetFollowersRequest) ProtoMessage() {}
 
 func (x *GetFollowersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_relation_relation_proto_msgTypes[4]
+	mi := &file_relation_relation_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -233,7 +293,7 @@ func (x *GetFollowersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFollowersRequest.ProtoReflect.Descriptor instead.
 func (*GetFollowersRequest) Descriptor() ([]byte, []int) {
-	return file_relation_relation_proto_rawDescGZIP(), []int{4}
+	return file_relation_relation_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetFollowersRequest) GetFolloweeId() int64 {
@@ -259,14 +319,15 @@ func (x *GetFollowersRequest) GetPage() int32 {
 
 type GetFollowersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FollowerIds   []int64                `protobuf:"varint,1,rep,packed,name=follower_ids,json=followerIds,proto3" json:"follower_ids,omitempty"`
+	Followers     []*User                `protobuf:"bytes,1,rep,name=followers,proto3" json:"followers,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetFollowersResponse) Reset() {
 	*x = GetFollowersResponse{}
-	mi := &file_relation_relation_proto_msgTypes[5]
+	mi := &file_relation_relation_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -278,7 +339,7 @@ func (x *GetFollowersResponse) String() string {
 func (*GetFollowersResponse) ProtoMessage() {}
 
 func (x *GetFollowersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_relation_relation_proto_msgTypes[5]
+	mi := &file_relation_relation_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -291,14 +352,21 @@ func (x *GetFollowersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFollowersResponse.ProtoReflect.Descriptor instead.
 func (*GetFollowersResponse) Descriptor() ([]byte, []int) {
-	return file_relation_relation_proto_rawDescGZIP(), []int{5}
+	return file_relation_relation_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *GetFollowersResponse) GetFollowerIds() []int64 {
+func (x *GetFollowersResponse) GetFollowers() []*User {
 	if x != nil {
-		return x.FollowerIds
+		return x.Followers
 	}
 	return nil
+}
+
+func (x *GetFollowersResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
 }
 
 type GetFolloweesRequest struct {
@@ -312,7 +380,7 @@ type GetFolloweesRequest struct {
 
 func (x *GetFolloweesRequest) Reset() {
 	*x = GetFolloweesRequest{}
-	mi := &file_relation_relation_proto_msgTypes[6]
+	mi := &file_relation_relation_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -324,7 +392,7 @@ func (x *GetFolloweesRequest) String() string {
 func (*GetFolloweesRequest) ProtoMessage() {}
 
 func (x *GetFolloweesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_relation_relation_proto_msgTypes[6]
+	mi := &file_relation_relation_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +405,7 @@ func (x *GetFolloweesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFolloweesRequest.ProtoReflect.Descriptor instead.
 func (*GetFolloweesRequest) Descriptor() ([]byte, []int) {
-	return file_relation_relation_proto_rawDescGZIP(), []int{6}
+	return file_relation_relation_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetFolloweesRequest) GetFollowerId() int64 {
@@ -363,14 +431,15 @@ func (x *GetFolloweesRequest) GetPage() int32 {
 
 type GetFolloweesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FolloweeIds   []int64                `protobuf:"varint,1,rep,packed,name=followee_ids,json=followeeIds,proto3" json:"followee_ids,omitempty"`
+	Followees     []*User                `protobuf:"bytes,1,rep,name=followees,proto3" json:"followees,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetFolloweesResponse) Reset() {
 	*x = GetFolloweesResponse{}
-	mi := &file_relation_relation_proto_msgTypes[7]
+	mi := &file_relation_relation_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -382,7 +451,7 @@ func (x *GetFolloweesResponse) String() string {
 func (*GetFolloweesResponse) ProtoMessage() {}
 
 func (x *GetFolloweesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_relation_relation_proto_msgTypes[7]
+	mi := &file_relation_relation_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -395,14 +464,21 @@ func (x *GetFolloweesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFolloweesResponse.ProtoReflect.Descriptor instead.
 func (*GetFolloweesResponse) Descriptor() ([]byte, []int) {
-	return file_relation_relation_proto_rawDescGZIP(), []int{7}
+	return file_relation_relation_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetFolloweesResponse) GetFolloweeIds() []int64 {
+func (x *GetFolloweesResponse) GetFollowees() []*User {
 	if x != nil {
-		return x.FolloweeIds
+		return x.Followees
 	}
 	return nil
+}
+
+func (x *GetFolloweesResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
 }
 
 var File_relation_relation_proto protoreflect.FileDescriptor
@@ -421,21 +497,30 @@ const file_relation_relation_proto_rawDesc = "" +
 	"followerId\x12\x1f\n" +
 	"\vfollowee_id\x18\x02 \x01(\x03R\n" +
 	"followeeId\"\x12\n" +
-	"\x10UnfollowResponse\"`\n" +
+	"\x10UnfollowResponse\"v\n" +
+	"\x04User\x12\x1f\n" +
+	"\vfollower_id\x18\x01 \x01(\x03R\n" +
+	"followerId\x12\x1a\n" +
+	"\busername\x18\x02 \x01(\tR\busername\x12\"\n" +
+	"\n" +
+	"avatar_url\x18\x03 \x01(\tH\x00R\tavatarUrl\x88\x01\x01B\r\n" +
+	"\v_avatar_url\"`\n" +
 	"\x13GetFollowersRequest\x12\x1f\n" +
 	"\vfollowee_id\x18\x01 \x01(\x03R\n" +
 	"followeeId\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x12\n" +
-	"\x04page\x18\x03 \x01(\x05R\x04page\"9\n" +
-	"\x14GetFollowersResponse\x12!\n" +
-	"\ffollower_ids\x18\x01 \x03(\x03R\vfollowerIds\"`\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\"]\n" +
+	"\x14GetFollowersResponse\x12/\n" +
+	"\tfollowers\x18\x01 \x03(\v2\x11.relation.v1.UserR\tfollowers\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"`\n" +
 	"\x13GetFolloweesRequest\x12\x1f\n" +
 	"\vfollower_id\x18\x01 \x01(\x03R\n" +
 	"followerId\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x12\n" +
-	"\x04page\x18\x03 \x01(\x05R\x04page\"9\n" +
-	"\x14GetFolloweesResponse\x12!\n" +
-	"\ffollowee_ids\x18\x01 \x03(\x03R\vfolloweeIds2\xc7\x02\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\"]\n" +
+	"\x14GetFolloweesResponse\x12/\n" +
+	"\tfollowees\x18\x01 \x03(\v2\x11.relation.v1.UserR\tfollowees\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total2\xc7\x02\n" +
 	"\x0fRelationService\x12A\n" +
 	"\x06Follow\x12\x1a.relation.v1.FollowRequest\x1a\x1b.relation.v1.FollowResponse\x12G\n" +
 	"\bUnfollow\x12\x1c.relation.v1.UnfollowRequest\x1a\x1d.relation.v1.UnfollowResponse\x12S\n" +
@@ -454,31 +539,34 @@ func file_relation_relation_proto_rawDescGZIP() []byte {
 	return file_relation_relation_proto_rawDescData
 }
 
-var file_relation_relation_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_relation_relation_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_relation_relation_proto_goTypes = []any{
 	(*FollowRequest)(nil),        // 0: relation.v1.FollowRequest
 	(*FollowResponse)(nil),       // 1: relation.v1.FollowResponse
 	(*UnfollowRequest)(nil),      // 2: relation.v1.UnfollowRequest
 	(*UnfollowResponse)(nil),     // 3: relation.v1.UnfollowResponse
-	(*GetFollowersRequest)(nil),  // 4: relation.v1.GetFollowersRequest
-	(*GetFollowersResponse)(nil), // 5: relation.v1.GetFollowersResponse
-	(*GetFolloweesRequest)(nil),  // 6: relation.v1.GetFolloweesRequest
-	(*GetFolloweesResponse)(nil), // 7: relation.v1.GetFolloweesResponse
+	(*User)(nil),                 // 4: relation.v1.User
+	(*GetFollowersRequest)(nil),  // 5: relation.v1.GetFollowersRequest
+	(*GetFollowersResponse)(nil), // 6: relation.v1.GetFollowersResponse
+	(*GetFolloweesRequest)(nil),  // 7: relation.v1.GetFolloweesRequest
+	(*GetFolloweesResponse)(nil), // 8: relation.v1.GetFolloweesResponse
 }
 var file_relation_relation_proto_depIdxs = []int32{
-	0, // 0: relation.v1.RelationService.Follow:input_type -> relation.v1.FollowRequest
-	2, // 1: relation.v1.RelationService.Unfollow:input_type -> relation.v1.UnfollowRequest
-	4, // 2: relation.v1.RelationService.GetFollowers:input_type -> relation.v1.GetFollowersRequest
-	6, // 3: relation.v1.RelationService.GetFollowees:input_type -> relation.v1.GetFolloweesRequest
-	1, // 4: relation.v1.RelationService.Follow:output_type -> relation.v1.FollowResponse
-	3, // 5: relation.v1.RelationService.Unfollow:output_type -> relation.v1.UnfollowResponse
-	5, // 6: relation.v1.RelationService.GetFollowers:output_type -> relation.v1.GetFollowersResponse
-	7, // 7: relation.v1.RelationService.GetFollowees:output_type -> relation.v1.GetFolloweesResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: relation.v1.GetFollowersResponse.followers:type_name -> relation.v1.User
+	4, // 1: relation.v1.GetFolloweesResponse.followees:type_name -> relation.v1.User
+	0, // 2: relation.v1.RelationService.Follow:input_type -> relation.v1.FollowRequest
+	2, // 3: relation.v1.RelationService.Unfollow:input_type -> relation.v1.UnfollowRequest
+	5, // 4: relation.v1.RelationService.GetFollowers:input_type -> relation.v1.GetFollowersRequest
+	7, // 5: relation.v1.RelationService.GetFollowees:input_type -> relation.v1.GetFolloweesRequest
+	1, // 6: relation.v1.RelationService.Follow:output_type -> relation.v1.FollowResponse
+	3, // 7: relation.v1.RelationService.Unfollow:output_type -> relation.v1.UnfollowResponse
+	6, // 8: relation.v1.RelationService.GetFollowers:output_type -> relation.v1.GetFollowersResponse
+	8, // 9: relation.v1.RelationService.GetFollowees:output_type -> relation.v1.GetFolloweesResponse
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_relation_relation_proto_init() }
@@ -486,13 +574,14 @@ func file_relation_relation_proto_init() {
 	if File_relation_relation_proto != nil {
 		return
 	}
+	file_relation_relation_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_relation_relation_proto_rawDesc), len(file_relation_relation_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
