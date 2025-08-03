@@ -27,6 +27,12 @@ message UnfollowRequest {
 message UnfollowResponse {
 }
 
+message User {
+  int64 follower_id = 1;
+  string username = 2;
+  optional string avatar_url = 3;
+}
+
 message GetFollowersRequest {
   int64 followee_id = 1;
   int32 limit = 2;
@@ -34,7 +40,8 @@ message GetFollowersRequest {
 }
 
 message GetFollowersResponse {
-  repeated int64 follower_ids = 1;
+  repeated User followers = 1;
+  int64 total = 2;
 }
 
 message GetFolloweesRequest {
@@ -44,5 +51,6 @@ message GetFolloweesRequest {
 }
 
 message GetFolloweesResponse {
-  repeated int64 followee_ids = 1;
+  repeated User followees = 1;
+  int64 total = 2;
 }
