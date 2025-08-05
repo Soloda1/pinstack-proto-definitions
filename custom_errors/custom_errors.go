@@ -20,6 +20,11 @@ var (
 	ErrUserSearchFailed   = errors.New("failed to search users")
 )
 
+// Internal service errors
+var (
+	ErrInternalServiceError = errors.New("internal service error")
+)
+
 // Auth errors
 var (
 	ErrInvalidCredentials    = errors.New("invalid credentials")
